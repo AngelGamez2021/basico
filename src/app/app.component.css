@@ -1,0 +1,18 @@
+.selected{
+    background-color: red; 
+    /* fondo */
+    color: white;
+    /* color */
+    padding: 10px;
+    /* padding */
+}
+
+
+.unSelected {
+    background-color: white;
+    padding: 10px;
+}
+
+.blue {
+    color: blue;
+}

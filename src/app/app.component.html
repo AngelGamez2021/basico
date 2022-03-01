@@ -1,0 +1,42 @@
+
+<!-- ///////////////////////INTERPOLACION ////////////////--> 
+<!-- <p>  {{titulo}} Lucha por tus objtivos </p>
+<p> {{5 + 5}}</p>
+<img src="{{url}}" alt=""> -->
+
+<!--//////////////////////////NGMODEL//////////////////////////////////////
+datos: usa interpolacion {{name}} definida como string en el ts. 
+une con el ngModel, importa el FormModule: -->
+
+<!-- <p>El nombre es: {{name}}</p>
+<input type="text" [(ngModel)]="name" > -->
+
+
+<!-- ////////////////////////DIRECTIVAS////////////////NGFOR//////////////// 
+en el ts crea un array con algunas ciudades 
+cities = ['Barranquilla','Cartagena', 'Santa Marta']-->
+
+<!-- <ul *ngFor="let city of cities">
+  <li>{{city}}</li>
+</ul> -->
+
+<!-- ////////////////////////DIRECTIVAS////////////////NGIF////////////////
+usamos de nuevo en el ts la interplacion del nombre es:-->
+
+<!-- <p *ngIf="name">El nombre es: {{name}}</p>
+<input type="text" [(ngModel)]="name" > -->
+<!-- lo anterior es si tiene nombre, muestra la caja de texto -->
+
+<!-- ////////////////////////DIRECTIVAS////////////////NGCLASS////////////////
+usamos el mismo ejemplo del ngfor:-->
+
+<!-- <ul *ngFor="let city of cities">
+  <li ngClass="selected blue">{{city}}</li>
+</ul> -->
+<!-- usamos las dos clases, selected y blu para darle estilo al array -->
+
+
+<ul *ngFor="let city of cities">
+  <li [ngClass]="['selected','blue']">{{city}}</li>
+</ul>
+<!-- tambien lo puede usar de esta manera funciona como un array de estilos-->
