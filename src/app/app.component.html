@@ -1,5 +1,4 @@
-
-<!-- ///////////////////////INTERPOLACION ////////////////--> 
+<!-- ///////////////////////INTERPOLACION ////////////////-->
 <!-- <p>  {{titulo}} Lucha por tus objtivos </p>
 <p> {{5 + 5}}</p>
 <img src="{{url}}" alt=""> -->
@@ -11,13 +10,12 @@ une con el ngModel, importa el FormModule: -->
 <!-- <p>El nombre es: {{name}}</p>
 <input type="text" [(ngModel)]="name" > -->
 
-
 <!-- ////////////////////////DIRECTIVAS////////////////NGFOR//////////////// 
 en el ts crea un array con algunas ciudades 
 cities = ['Barranquilla','Cartagena', 'Santa Marta']-->
 
-<!-- <ul *ngFor="let city of cities">
-  <li>{{city}}</li>
+<!-- <ul >
+  <li *ngFor="let city of cities" >{{city}}</li>
 </ul> -->
 
 <!-- ////////////////////////DIRECTIVAS////////////////NGIF////////////////
@@ -35,8 +33,157 @@ usamos el mismo ejemplo del ngfor:-->
 </ul> -->
 <!-- usamos las dos clases, selected y blu para darle estilo al array -->
 
-
-<ul *ngFor="let city of cities">
+<!-- <ul *ngFor="let city of cities">
   <li [ngClass]="['selected','blue']">{{city}}</li>
-</ul>
+</ul> -->
 <!-- tambien lo puede usar de esta manera funciona como un array de estilos-->
+
+<!-- <ul *ngFor="let city of cities">
+    <li [ngClass]="{'selected': true}">{{city}}</li>
+</ul> -->
+<!-- aplicamos lo mismo pero ponemos si esa condicion se cumple, true o false -->
+
+<!-- <ul *ngFor="let city of cities">
+    <li [ngClass]="{'selected': city === 'Barranquilla'}">{{city}}</li>
+</ul> -->
+<!-- condicionmos que si city es igual a barranquilla enotnces aplique esa clase, sin antes recorrer el
+array con el Ngfor -->
+
+<!-- <ul *ngFor="let city of cities">
+    <li [ngClass]="{'selected': city === 'Barranquilla','blue': city !== 'Barranquilla'}">{{city}}</li>
+</ul> -->
+<!-- ponemos dos condiciones, si es igual a quilla se pone esa clase, y si es diferente
+se pone la otra clase -->
+
+<!-- ////////////////////////DIRECTIVAS////////////////NGSTYLE////////////////
+usamos el mismo ejemplo del ngfor:-->
+
+<!-- <ul *ngFor="let city of cities">
+    <li [ngStyle]="{'color': 'red', 'background': 'black'}">{{city}}</li>
+</ul> -->
+<!-- se colocan los estilos acá mismo y podemos usar varios tambien, aplicados al array -->
+
+<!-- <ul *ngFor="let city of cities">
+    <li [ngStyle]="{'color': 'white', 
+    'background-color': city === 'Barranquilla' ? 'blue' : 'green'  }">{{city}}</li>
+</ul> -->
+<!--  acá decimos que la letra sea blanca, y que el color del fondo sea: si city es igual a quilla
+sea 'blue' y si no (:) 'green'  -->
+
+<!-- /////////////////////////CICLOS DE VIDA/////////////////////////////////////// -->
+
+<!-- Onchanges: si tenemos un Input o un Output de entrada primero se ejecuta el Onchenge primero que el OnInit
+OnInit: peticiones, variables, peticiones a una API
+OnDestroy: finaliza el ciclo de vida del componente, suscripciones de los observables, si un usuario
+desea salir de un formulario sin guardar cambios -->
+
+<!-- ve al components ts ...-->
+
+<!-- /////////////////////////EVENT BINDING /////////////////////////////////////// -->
+
+<!-- responder a acciones de usuarios -->
+
+<!-- <ul *ngFor="let city of cities">
+    <li (click)="click(city)" [ngClass]="{'selected': city === selection}">{{city}}</li>
+</ul>
+
+<div *ngIf="selection">
+    <p> Your City is: {{selection}}</p>
+    <button (click)="Onclear()"> Clear your selection </button>
+</div> -->
+
+<!-- recorremos, tenemos un click, se pondra 'select' si city es igual a selection
+creamos el metodo click le pasamos el city y en ts creamos
+click (city: string){
+
+  console.log('city ->', city);
+  this.selection = city;
+  
+creamos un button para desseleccionar, y para que no salga el boton a menos que se escoja una ciudad 
+al igual que el selection, pasamos el *ngIF="selection" de la p para el div
+
+creamos el metodo del boton en el ts} 
+
+Onclear(){
+  this.selection = '';
+
+  // acá dice que si presionamos el boton de este metodo, automanticamente se pondra vacion
+
+
+}-->
+
+<!-- //////////////////////////////INPUT/////////////////////////////////////// -->
+
+<!-- <ul>
+    <li *ngFor="let city of cities" (click)="click(city)" [ngClass]="{ selected: city === selection }">
+        {{ city }}
+    </li>
+</ul>
+
+<div *ngIf="selection">
+    <p>Your City is: {{ selection }}</p>
+    <app-button button (click)="Onclear()" [color]="'blue'" [label]="'Clear your selection'"></app-button>
+</div> -->
+
+<!-- 
+1. Comentariamos el boton que estaba y lo pasamos al hijo, que es quien le dirá al padre has:
+2. Le pasamos el metodo creado, creamos una condicion de color, y el label que haga lo mismo
+   que el boton comentariado (EL PADRE LE PASA ESA INFORMACION AL HIJO)
+3. Creamos los @input en el hijo y los string vacios
+4. hacemos el botton en el html hijo y creamos el botton, haciendo interpolacion {{label}} 
+5. para pasar el color tambien:
+   <button [ngStyle]="{'background-color' : color}">{{label}}</button>
+  -->
+
+<!-- //////////////////////////////INPUT/////////////////////////////////////// -->
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 my-4">
+
+
+            <app-form-new-item (newItemEvent)="addNewCity($event)" [label]="'City'" [className]="'btn-info'"></app-form-new-item>
+
+
+        </div>
+        <div class="col-md-8">
+            <ul>
+                <li *ngFor="let city of cities" (click)="click(city)" [ngClass]="{ 'alert alert-info': city === selection }">
+                    {{ city }}
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-4">
+            <div *ngIf="selection">
+                <p>Your City is: {{ selection }}</p>
+                <app-button button (click)="Onclear()" [color]="'blue'" [label]="'Clear your selection'"></app-button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- implementamos el bootstrap 
+1. creamos un nuevo componente
+2. creamos una metodo para agregar una nueva ciudad 
+   addNewCity(city: string){  this.cities.push(city);   }
+3. añadimos dentro del row un col-md-12 y ponemos el app del nuevo components
+4. editamos el html del nuevo componente
+5. tenemos un label, un input(caja de texto) y un boton para mandar desde el hijo al padre, la ciudad 
+   que se va ingresar
+6. al input le pasamos un #newItem y en el boton creamos el metodo y pasamos el #, y despues
+   pasamos a crear el metodo en el tscomponents hijo..
+7. en el ts del hijo: onAddItem(item: string){ console.log('Item ->', item); }
+8. en el label ponemos un {{label}}, en el boton creamos un [ngclass]="[className]" 
+   y añadimos el {{label}} tambien y esto lo crearemos en un su ts como dos @input
+9. Luego lo pasamos al app-fomr-new que está en el padre
+app-form-new-item [label]="'City'" [className]="'btn-info'"></app-form-new-item>
+10. en ese componente debemos emitir hacia el padre lo que almacenaremos.
+11. creamos un OutPut
+ @Output() newItemEvent = new EventEmitter<string>();
+
+12. creamos el evento. dentro de la funcion que tenemos onAddItem
+ this.newItemEvent.emit(item)
+
+ 13. dentro del mismo app del new item ponemos antes el (newItemEvent)="addNewCity($event)
+
+-->

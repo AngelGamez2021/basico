@@ -1,18 +1,7 @@
-.selected{
-    background-color: red; 
-    /* fondo */
-    color: white;
-    /* color */
-    padding: 10px;
-    /* padding */
+ul {
+    list-style-type: none;
 }
 
-
-.unSelected {
-    background-color: white;
-    padding: 10px;
-}
-
-.blue {
-    color: blue;
+.container {
+    padding: 20px;
 }
